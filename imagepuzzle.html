@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Puzzle Game</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/image-puzzle.css" rel="stylesheet" />
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/image-puzzle.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.4/tailwind.min.css">
+</head>
+
+<body>
+    <div id="collage">
+        <div class="flex items-center justify-center font-bold text-4xl text-blue-700 ">
+            <h2>Puzzle Game</h2>
+        </div>
+
+        <div class="bg-gray-500 p-10 mx-5 flex flex-col items-center justify-center ">
+
+            <div id="imgTitle" class="text-blue-500 text-xl font-semibold py-2"> </div>
+
+            <div class="bg-gray-300 grid grid-flow-col grid-cols-2  gap-3 items-center justify-center border-2 ">
+                <div id="actualImageBox" class="items-center justify-center ">
+                    <div class="font-sans font-semibold text-lg text-blue-700">
+                        <div id="stepBox"> Count:
+                            <div class="stepCount bg-color-white inline-block ">0</div>
+                        </div>
+                        <div id="timeBox">Time:
+                            <span id="timerPanel"></span> seconds
+                        </div>
+                        <div class="text-center py-3">See the picture and solve the puzzle.</div>
+                        <img id="actualImage" class="items-center px-10 h-64 w-full m-auto ">
+                        <div class="flex justify-evenly py-4">
+                            <button id="btnRule"
+                                class="bg-blue-500 hover:bg-blue-700 text-blue-50  font-semibold py-2 px-3 rounded-md"
+                                onclick="rules();">Rules</button>
+                            <button id="newPhoto"
+                                class="bg-blue-500 hover:bg-blue-700 text-blue-50 font-semibold py-2 px-4 rounded-md">NextPicture</button>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- #collage #sortable li {
+                    background-size: 400% 400%;
+                    border: none;
+                    cursor: pointer;
+                    margin: 0;
+                    padding: 0;
+                    float: left;
+                    width: 100px;
+                    height: 100px;
+                } -->
+                <div class="flex items-center justify-center ">
+                    <ul id="sortable" class="list-none inline-block m-8">
+                        <li id="sortable" class="bg-auto cursor-pointer border p-0 m-0 float-left">
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+        <div id="gameOver" class="hidden">
+            <div class="bg-gradient-to-r from-green-400 to-blue-500  px-2 py-2 text-center text-xl space-y-4 text-green-900">
+                <div> Game over !!</div>
+                <div> Congratulations!! You got the picture ready.</div>
+                 <div> MOVES: <span class="stepCount">0</span> </div>
+                <div> Time spent: <span class="timeCount">0</span> seconds</span> </div>
+              <div> <button type="button" onclick="window.location.reload(true);">Play more</button> </div>  
+                 
+            </div>
+         </div>
+
+    
+      <script>
+        var images = [
+            { src: 'img/bhutan.jpg', title: 'Tiger’s Nest Temple, Bhutan' },
+            { src: 'img/vietnam.jpg', title: 'Ha Long Bay, Vietnam' },
+            { src: 'img/taj_mahal.jpg', title: 'Taj Mahal in Agra' },
+            { src: 'img/china.jpg', title: 'Great Wall of China, China' },
+            { src: 'img/kohila.jpg', title: 'Kohila mill' }
+        ];
+
+        $(function () {
+            var gridSize = $('#levelPanel :radio:checked').val();
+            imagePuzzle.startGame(images, gridSize);
+            $('#newPhoto').click(function () {
+                var gridSize = $('#levelPanel :radio:checked').val();
+                imagePuzzle.startGame(images, gridSize);
+            });
+
+            $('#levelPanel :radio').change(function (e) {
+                var gridSize = $(this).val();
+                imagePuzzle.startGame(images, gridSize);
+            });
+        });
+        function rules() {
+            alert('Rearrange the pieces so that you get a sample image. \nThe steps taken are counted');
+        }
+     </script>
+</body>
+
+</html>
